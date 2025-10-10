@@ -26,16 +26,4 @@ function plot_filter_responses()
     end
     sgtitle('Magnitude Frequency Response of 2D Filters');
 
-    % Save each filter's frequency response as an image
-    for k = 1:length(filters)
-        H = freqz2(filters{k}, [64 64]);
-        fig = figure('Visible','off');
-        imagesc(abs(H));
-        title(['Frequency Response: ', titles{k}], 'Interpreter', 'none');
-        axis image; axis off;
-        colorbar;
-        saveas(fig, [titles{k}, '_fft.png']);
-        close(fig);
-    end
-    disp('All frequency response plots saved as PNG images.');
 end
