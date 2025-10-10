@@ -14,16 +14,16 @@ function plot_filter_responses()
     titles = {'Average', 'CentralDiff1', 'CentralDiff2', ...
               'Prewitt1', 'Prewitt2', 'Sobel1', 'Sobel2'};
 
-    % Plot all responses in a single figure
-    figure('Name','Magnitude Frequency Response of 2D Filters','NumberTitle','off');
+    % Save each filter's frequency response as an image
     for k = 1:length(filters)
-        subplot(2,4,k);
         H = freqz2(filters{k}, [64 64]);
+        fig = figure('Visible','off');
         imagesc(abs(H));
-        title(titles{k}, 'Interpreter', 'none');
+        title(['Frequency Response: ', titles{k}], 'Interpreter', 'none');
         axis image; axis off;
         colorbar;
+        saveas(fig, [titles{k}, '_fft.png']);
+        close(fig);
     end
-    sgtitle('Magnitude Frequency Response of 2D Filters');
-
+    disp('All frequency response plots saved as PNG images.');
 end
